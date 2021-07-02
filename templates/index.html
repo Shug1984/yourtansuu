@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<h1><font color="red">{{ UserID }}</font>さんようこそ！！</h1>
+
+<p> ログアウトは
+<a href="{% url 'logout' %}">こちら</a>
+</p>
+
+{% endblock content %}

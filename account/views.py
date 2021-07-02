@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from .forms import AccountForm, AddAccountForm
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 class AccountRegistration(TemplateView):
 
@@ -43,6 +44,38 @@ class AccountRegistration(TemplateView):
             print(self.params["account_form"].errors)
 
         return render(request,"signup.html",context=self.params)
+
+def user_login(request):
+    if request.method == 'POST':
+        ID = request.POST.get('userid')
+        Pass = request.POST.get('password')
+
+        user = authenticate(username=ID, password=Pass)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                return HttpResponse("アカウントが有効ではありません")
+        else:
+            return HttpResponse("ログインIDまたはパスワードが間違っています")
+    else:
+        return render(request, 'login.html')
+
+@login_required
+def logout(request):
+    logout(request)
+    return HttpResponse("ログアウトしました")
+
+
+@login_required
+def index(request):
+    params = {"UserID":request.user,}
+    return render(request, "index.html", context=params)
+
+
+
 
 
 

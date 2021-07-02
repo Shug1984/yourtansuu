@@ -13,14 +13,12 @@ class AccountForm(forms.ModelForm):
 class AddAccountForm(forms.ModelForm):
     class Meta():
         model = Account
-        fields = ('last_name','first_name','last_kana','first_kana','tel','email','password','account_image')
+        fields = ('last_name','first_name','last_kana','first_kana','tel','account_image')
         labels = {
             'last_name':"名字",
             'first_name':"名",
             'last_kana':"名字(フリガナ)",
             'first_kana':"名(フリガナ)",
             'tel':"電話番号",
-            'email':"メールアドレス",
-            'password':"パスワード",
             'account_image':"写真"
         }

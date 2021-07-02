@@ -9,11 +9,8 @@ class Account(models.Model):
     first_name = models.CharField(max_length=100)
     last_kana = models.CharField(max_length=100)
     first_kana = models.CharField(max_length=100)
-
     tel = models.CharField(max_length=50)
-    email = models.CharField(max_length=150)
-    password = models.CharField(max_length=100)
-
+   
     account_image = models.ImageField(upload_to="profile_pics",blank=True)
 
     def __str__(self):
